@@ -88,15 +88,24 @@ async def update_review(id: int, review: Review):
         raise HTTPException(status_code=404, detail="This review does not exist.")
     
 #Add delete review:
-#_________________________________________________________________________________  
-    stored_item_data = items[item_id]
-    stored_item_model = Item(**stored_item_data)
-    update_data = item.dict(exclude_unset=True)
-    updated_item = stored_item_model.copy(update=update_data)
-    items[item_id] = jsonable_encoder(updated_item)
-    return updated_item
+#_________________________________________________________________________________
+    # stored_item_data = items[item_id]
+    # stored_item_model = Item(**stored_item_data)
+    # update_data = item.dict(exclude_unset=True)
+    # updated_item = stored_item_model.copy(update=update_data)
+    # items[item_id] = jsonable_encoder(updated_item)
+    # return updated_item
+
+@app.delete("/delete_review", response_model=Review)
+#args: ID of the review to be deleted
+async def delete_review(id: int):
+    # Check if the review is in the review dictionary first before trying to delete the review
+    if id in review_dict:
+        # Remove, get, and return the review
+        deleted_review = review_dict.pop(id)
+        return deleted_review
+    else:
+        raise HTTPException(status_code=404, detail="This review does not exist.")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
-
-
