@@ -89,21 +89,16 @@ async def update_review(id: int, review: Review):
     
 #Add delete review:
 #_________________________________________________________________________________
-    # stored_item_data = items[item_id]
-    # stored_item_model = Item(**stored_item_data)
-    # update_data = item.dict(exclude_unset=True)
-    # updated_item = stored_item_model.copy(update=update_data)
-    # items[item_id] = jsonable_encoder(updated_item)
-    # return updated_item
 
 @app.delete("/delete_review", response_model=Review)
 #args: ID of the review to be deleted
 async def delete_review(id: int):
     # Check if the review is in the review dictionary first before trying to delete the review
-    if id in review_dict:
+    if id in review_dict.keys():
         # Remove, get, and return the review
-        deleted_review = review_dict.pop(id)
-        return deleted_review
+        review_to_delete = review_dict[id]
+        del review_dict[id]
+        return review_to_delete
     else:
         raise HTTPException(status_code=404, detail="This review does not exist.")
 
