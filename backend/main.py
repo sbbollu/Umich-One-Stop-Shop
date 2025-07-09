@@ -7,6 +7,7 @@ from pydantic import Field
 
 class Review(BaseModel):
     id: int = Field(frozen=True) #Required parameter
+    #restaurant_id : int
     location: str
     rating: int
     review: str
@@ -21,20 +22,67 @@ class Review(BaseModel):
             "date" : ""
         }
 
-class Places(BaseModel):
+class GenericPlace(BaseModel):
     id: int = Field(frozen=True) #Required parameter
+    name: str
+    other_parameters: dict
 
     class Config:
         schema_extra = {
-            "id" : 0
+            "id" : 0,
+            "name" : "",
+            "other_parameters" : {}
         }
 
 class Restaurant(BaseModel):
     id: int = Field(frozen=True) #Required parameter
+    name: str
+    address: str
+    #price_rating: float (Define our rating system)
+    accessibilty: bool #May change later
+    blue_bucks: bool
 
     class Config:
         schema_extra = {
-            "id" : 0
+            "id" : 0,
+            "name" : "",
+            "address": "",
+            "accessibilty": True,
+            "blue_bucks": True
+        }
+
+class StudySpots(BaseModel):
+    id: int = Field(frozen=True) #Required parameter
+    name: str
+    address: str
+    #price_rating: float (Define our rating system)
+    accessibilty: bool #May change later
+    blue_bucks: bool
+
+    class Config:
+        schema_extra = {
+            "id" : 0,
+            "name" : "",
+            "address" : "",
+            "accessibilty": True,
+            "blue_bucks": True
+        }
+
+class Stores(BaseModel):
+    id: int = Field(frozen=True) #Required parameter
+    name: str
+    address: str
+    #price_rating: float (Define our rating system)
+    accessibilty: bool #May change later
+    blue_bucks: bool
+
+    class Config:
+        schema_extra = {
+            "id" : 0,
+            "name" : "",
+            "address" : "",
+            "accessibilty": True,
+            "blue_bucks": True
         }
 
 app = FastAPI()
