@@ -3,13 +3,39 @@ import uvicorn
 from pydantic import BaseModel
 #from datetime import date, datetime, time, timedelta
 from fastapi.encoders import jsonable_encoder
+from pydantic import Field
 
 class Review(BaseModel):
-    id: int | None = None
+    id: int = Field(frozen=True) #Required parameter
     location: str
     rating: int
     review: str
     date: str
+
+    class Config:
+        schema_extra = {
+            "id" : 0,
+            "location" : "",
+            "rating" : 5,
+            "review" : 0,
+            "date" : ""
+        }
+
+class Places(BaseModel):
+    id: int = Field(frozen=True) #Required parameter
+
+    class Config:
+        schema_extra = {
+            "id" : 0
+        }
+
+class Restaurant(BaseModel):
+    id: int = Field(frozen=True) #Required parameter
+
+    class Config:
+        schema_extra = {
+            "id" : 0
+        }
 
 app = FastAPI()
 
