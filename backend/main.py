@@ -7,7 +7,7 @@ from pydantic import Field
 
 class Review(BaseModel):
     id: int = Field(frozen=True) #Required parameter
-    #restaurant_id : int
+    location_id : int
     location: str
     rating: int
     review: str
@@ -22,67 +22,18 @@ class Review(BaseModel):
             "date" : ""
         }
 
-class GenericPlace(BaseModel):
+class Location(BaseModel): #Will work for any location
     id: int = Field(frozen=True) #Required parameter
     name: str
-    other_parameters: dict
-
-    class Config:
-        schema_extra = {
-            "id" : 0,
-            "name" : "",
-            "other_parameters" : {}
-        }
-
-class Restaurant(BaseModel):
-    id: int = Field(frozen=True) #Required parameter
-    name: str
-    address: str
-    #price_rating: float (Define our rating system)
-    accessibilty: bool #May change later
     blue_bucks: bool
+    dining_dollars: bool
+    parameters: dict
 
     class Config:
         schema_extra = {
             "id" : 0,
             "name" : "",
-            "address": "",
-            "accessibilty": True,
-            "blue_bucks": True
-        }
-
-class StudySpots(BaseModel):
-    id: int = Field(frozen=True) #Required parameter
-    name: str
-    address: str
-    #price_rating: float (Define our rating system)
-    accessibilty: bool #May change later
-    blue_bucks: bool
-
-    class Config:
-        schema_extra = {
-            "id" : 0,
-            "name" : "",
-            "address" : "",
-            "accessibilty": True,
-            "blue_bucks": True
-        }
-
-class Stores(BaseModel):
-    id: int = Field(frozen=True) #Required parameter
-    name: str
-    address: str
-    #price_rating: float (Define our rating system)
-    accessibilty: bool #May change later
-    blue_bucks: bool
-
-    class Config:
-        schema_extra = {
-            "id" : 0,
-            "name" : "",
-            "address" : "",
-            "accessibilty": True,
-            "blue_bucks": True
+            "parameters" : {}
         }
 
 app = FastAPI()
@@ -160,9 +111,6 @@ async def update_review(id: int, review: Review):
         return new_review
     else:
         raise HTTPException(status_code=404, detail="This review does not exist.")
-    
-#Add delete review:
-#_________________________________________________________________________________
 
 @app.delete("/delete_review", response_model=Review)
 #args: ID of the review to be deleted
@@ -175,6 +123,7 @@ async def delete_review(id: int):
         return review_to_delete
     else:
         raise HTTPException(status_code=404, detail="This review does not exist.")
+#________________________________________________________________________________________
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
