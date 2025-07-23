@@ -10,12 +10,13 @@ function Login() {
     const [successMessage, setsuccessMessage] = useState("");
 
     const handleSubmit = async (event) => {
-    event.preventDefault(); //can't submit empty field
+    event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
     try {
         const response = await axios.post("http://localhost:8000/post_user_and_pass", {
             username: username,
             password: password
-        }); //post_user for creating users
+        }
+        ); //post_user for creating users
       
         seterrorMessage('');
         setsuccessMessage('SUCCESS');
