@@ -1,0 +1,29 @@
+.login-page-username {
+  font-size: 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.login-page-password {
+  font-size: 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.login-page-submit-button {
+  font-size: 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #0a4a85;
+  color: #fcdc5e;
+}
