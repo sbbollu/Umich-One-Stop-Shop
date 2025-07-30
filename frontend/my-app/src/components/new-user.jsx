@@ -1,19 +1,13 @@
 //Login information frontend
 import React, { useState } from "react";
 import axios from "axios";
-import "./login-page.css";
-import { useNavigate } from 'react-router-dom';
+import "./new-user.css";
 
-function Login() {
+function NewUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, seterrorMessage] = useState("");
   const [successMessage, setsuccessMessage] = useState("");
-  const navigate = useNavigate();
-
-  const goToNewUser = () => {
-      navigate('/new_user'); 
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
@@ -34,7 +28,7 @@ function Login() {
   //what the user sees
   return (
     <div>
-    <h1>Welcome to Umich One-Stop-Shop</h1>
+    <h1>Create a New Account</h1>
     <form onSubmit={handleSubmit}>
       <input
         className="login-page-username"
@@ -55,10 +49,9 @@ function Login() {
       </button>
       {errorMessage && <div>{errorMessage}</div>}
       {successMessage && <div>{successMessage}</div>}
-      <button type="button" className="login-page-submit-button" onClick = {goToNewUser}>Create New Account</button>
     </form>
     </div>
   );
 }
 
-export default Login;
+export default NewUser;
