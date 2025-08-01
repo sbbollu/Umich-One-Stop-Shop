@@ -13,7 +13,7 @@ function NewUser() {
     event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
     try {
       const response = await axios.post(
-        `http://localhost:8000/post_user_and_pass?username=${username}&password=${password}`
+        `http://localhost:8000/post_user?username=${username}&password=${password}`
       ); //post_user for creating users
       seterrorMessage("");
       setsuccessMessage("SUCCESS");
@@ -39,13 +39,13 @@ function NewUser() {
       />
       <input
         className="login-page-password"
-        type="text"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
       <button type="submit" className="login-page-submit-button">
-        Login
+        Create Account
       </button>
       {errorMessage && <div>{errorMessage}</div>}
       {successMessage && <div>{successMessage}</div>}

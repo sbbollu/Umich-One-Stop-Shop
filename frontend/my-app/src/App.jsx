@@ -7,6 +7,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/login-page';
 import NewUser from './components/new-user';
+import Homepage from './components/homepage';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/new_user" element={<NewUser />} />
+            <Route path="/homepage" element={<Homepage />} />
           </Routes>
         </BrowserRouter>
       </header>

@@ -15,6 +15,10 @@ function Login() {
       navigate('/new_user'); 
   };
 
+  const goToHomepage = () => {
+      navigate('/homepage'); 
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
     try {
@@ -45,13 +49,16 @@ function Login() {
       />
       <input
         className="login-page-password"
-        type="text"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
       <button type="submit" className="login-page-submit-button">
         Login
+      </button>
+      <button type="submit" className="login-page-submit-button" onClick = {goToHomepage}>
+        Continue as a Guest
       </button>
       {errorMessage && <div>{errorMessage}</div>}
       {successMessage && <div>{successMessage}</div>}
