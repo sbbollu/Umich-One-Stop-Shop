@@ -51,16 +51,16 @@ class User(BaseModel):
 
 
 # Stores User Objects
-users_list = []
+#users_list = []
+users_dict = {}
 
 
 # Validates username and password
 @app.get("/login_button")
 async def login_button(username: str, password: str):
     login_success = False
-    for user in users_list:
-        if user.username == username and user.password == password:
-            login_success = True
+    if users_dict[username]:
+        login_success = True
     return login_success
 
 
@@ -68,19 +68,19 @@ async def login_button(username: str, password: str):
 
 
 # Creating and adding a new user login, including the survey
-@app.post("/post_user", response_model=User)
-async def store_user_password(username: str, password: str, survey: dict):
-    recommendations = model(survey)
-    print(recommendations)
-    my_user = User(
-        username=username, password=password, recommendations=recommendations
-    )
-    users_list.append(my_user)
-    return my_user
-    # If request is 200 (success) -> frontend call ml model
+# @app.post("/post_user", response_model=User)
+# async def store_user_password(username: str, password: str, survey: dict):
+#     recommendations = model(survey)
+#     print(recommendations)
+#     my_user = User(
+#         username=username, password=password, recommendations=recommendations
+#     )
+#     users_dict[username] = my_user
+#     return my_user
+#     # If request is 200 (success) -> frontend call ml model
 
 
-# Creating a post for JUST a username and password, no survey
+# Creating a post for JUST a username and password, no survey and no recommendations (just the default ones)
 @app.post("/post_user_and_pass", response_model=User)
 async def store_user_password(username: str, password: str):
     recommendations = model()
@@ -91,9 +91,17 @@ async def store_user_password(username: str, password: str):
         survey=survey,
         recommendations=recommendations,
     )
-    users_list.append(my_user)
+    users_dict[username] = my_user
     return my_user
 
+# adding the survey and resulting recommendations to a user
+# for a new user (NOT a guest user) when they create an account for the first time
+@app.post("/post_survey_answers", response_model=dict)
+async def post_survey_answers(username: str, password: str, survey: dict):
+    my_user = users_dict[username]
+    my_user.survey = survey
+    my_user.recommendations = model(survey)
+    return survey
 
 # Returning a random recommendation feed for guest users
 @app.get("/get_random_feed")
@@ -101,13 +109,14 @@ async def get_random_feed():
     return model()
 
 
-# Lets the user update their preferences and changes their recommendations
+# Lets the user update their preferences and changes their recommendations by redoing the survey
 @app.patch("/change_recommendations")
 async def change_recommendations(username: str, password: str, survey: dict):
     # changed user.recommendations as well
-    for user in users_list:
-        if user.username == username and user.password == password:
-            user.recommendations = model(survey)
+    user = users_dict[username]
+    if user.username == username and user.password == password:
+        # NOTE: check to see that these changes get "pushed" into the dict afterwards
+        user.recommendations = model(survey)
 
     return model(survey)
 
