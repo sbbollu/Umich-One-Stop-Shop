@@ -8,21 +8,65 @@ function NewUser() {
   const [password, setPassword] = useState("");
   const [errorMessage, seterrorMessage] = useState("");
   const [successMessage, setsuccessMessage] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+
+  // const checkDuplicateUsernames = async (event) => {
+  //   event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:8000/check_multiple_usernames?new_username=${username}`
+  //     ); //post_user for creating users
+  //     seterrorMessage("");
+  //     setsuccessMessage("SUCCESS");
+  //   } catch (error) {
+  //     seterrorMessage("ERROR");
+  //     setsuccessMessage("");
+
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
     try {
-      const response = await axios.post(
-        `http://localhost:8000/post_user?username=${username}&password=${password}`
-      ); //post_user for creating users
       seterrorMessage("");
-      setsuccessMessage("SUCCESS");
-    } catch (error) {
-      seterrorMessage("ERROR");
-      setsuccessMessage("");
 
-      console.error("Error:", error);
-    }
+      const checkDuplicateUsernames = await axios.get(
+        `http://localhost:8000/check_multiple_usernames?new_user_username=${username}`
+      ); 
+
+      console.log(checkDuplicateUsernames.data);
+
+      if (password !== confirmPassword) {
+
+        seterrorMessage("Passwords do not match");
+        
+      }
+      else {
+
+        if (checkDuplicateUsernames.data == false) {
+        const response = await axios.post(
+          `http://localhost:8000/post_user_and_pass?username=${username}&password=${password}`
+        ); //post_user for creating users
+        seterrorMessage("");
+        setsuccessMessage("SUCCESS");
+        }
+        else {
+          seterrorMessage("Username already exists, try a different one");
+        }
+
+      }
+      
+      } catch (error) {
+        seterrorMessage("ERROR");
+        setsuccessMessage("");
+
+        console.error("Error:", error);
+      }
+
+      setUsername("");
+      setPassword("");
+      setconfirmPassword("");
   };
 
   //what the user sees
@@ -43,6 +87,13 @@ function NewUser() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+      />
+      <input
+        className="login-page-password"
+        type="password"
+        value={confirmPassword || ""}
+        onChange={(e) => setconfirmPassword(e.target.value)}
+        placeholder="Confirm Password"
       />
       <button type="submit" className="login-page-submit-button">
         Create Account

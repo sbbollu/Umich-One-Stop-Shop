@@ -63,6 +63,17 @@ async def login_button(username: str, password: str):
         login_success = True
     return login_success
 
+#NOTE: for testing, get rid of later
+@app.get("/get_all_users")
+async def get_all_users():
+    return users_dict;
+
+#NOTE: for testing, get rid of later
+@app.delete("/delete_all_users")
+async def delete_all_users():
+    users_dict.clear();
+    return users_dict;
+
 
 # NOTE:Need to add error message on frontend
 
@@ -107,6 +118,15 @@ async def post_survey_answers(username: str, password: str, survey: dict):
 @app.get("/get_random_feed")
 async def get_random_feed():
     return model()
+
+# Returns true if an existing account has the same username as a user who is making a new account
+@app.get("/check_multiple_usernames")
+async def check_multiple_usernames(new_user_username: str):
+    duplicate_usernames = users_dict.get(new_user_username)
+    if (duplicate_usernames == None):
+        return False
+    else:
+        return True
 
 
 # Lets the user update their preferences and changes their recommendations by redoing the survey

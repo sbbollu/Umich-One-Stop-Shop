@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/login-page';
 import NewUser from './components/new-user';
 import Homepage from './components/homepage';
+import Surveypage from "./components/survey-page";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/new_user" element={<NewUser />} />
             <Route path="/homepage" element={<Homepage />} />
+            <Route path="/surveypage" element={<Surveypage />} />
           </Routes>
         </BrowserRouter>
       </header>

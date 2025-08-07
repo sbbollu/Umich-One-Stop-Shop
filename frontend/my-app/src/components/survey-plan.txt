@@ -1,0 +1,52 @@
+#Login Flow#
+
+Login Page  -> Create Account (write username and password for the new acct) -> survey -> Your homepage
+            -> Continue as Guest -> Random homepage
+            -> Login -> Your homepage
+
+#Planned questions for the survey#
+
+#What features will we implement in the app by the end of the summer?
+- study spots
+- price comparator (ambitious)
+- restaurant/business reviews (include google maps images of them)
+
+#Study spot questions#
+- what noise level are you comfortable with?
+
+- what busyness levels are you comfortable with?
+
+- which of these amenities do you require?
+    - CAEN
+    - moniters/computers
+    - good number of outlets
+    - nearby food/cafes
+    - whiteboards
+    - comfortable seating
+    - large tables
+    - private rooms
+    - not a depressing atmosphere
+    - closeby to bus stops
+
+#Price comparator questions#
+
+#Restaurant/business review questions#
+- what is your budget?
+    - low end
+    - mid end
+    - high end
+    - doesn't matter
+
+- how important is price to you on a scale of 1 to 5?
+
+- do you prefer going to stores on central campus or north campus?
+    - north 
+    - central
+    - no preference -> default to central
+
+- how far are you willing to travel to a location from central campus on a scale of 1 to 5?
+
+
+
+
+    
