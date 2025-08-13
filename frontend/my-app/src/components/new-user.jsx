@@ -1,5 +1,6 @@
 //Login information frontend
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./new-user.css";
 
@@ -9,6 +10,10 @@ function NewUser() {
   const [errorMessage, seterrorMessage] = useState("");
   const [successMessage, setsuccessMessage] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState(true);
+
+  const navigate = useNavigate();
+  const [loginType, setLoginType] = useState("");
 
   // const checkDuplicateUsernames = async (event) => {
   //   event.preventDefault(); //means that the "default" field (empty strings) can't be submitted
@@ -33,23 +38,29 @@ function NewUser() {
 
       const checkDuplicateUsernames = await axios.get(
         `http://localhost:8000/check_multiple_usernames?new_user_username=${username}`
-      ); 
+      );
 
-      console.log(checkDuplicateUsernames.data);
+      
 
       if (password !== confirmPassword) {
 
+        setCheckPassword(false);
         seterrorMessage("Passwords do not match");
         
       }
       else {
 
+        
+        console.log(checkDuplicateUsernames.data);
+
         if (checkDuplicateUsernames.data == false) {
-        const response = await axios.post(
-          `http://localhost:8000/post_user_and_pass?username=${username}&password=${password}`
-        ); //post_user for creating users
-        seterrorMessage("");
-        setsuccessMessage("SUCCESS");
+          const response = await axios.post(
+            `http://localhost:8000/post_user_and_pass?username=${username}&password=${password}`
+          ); //post_user for creating users
+
+          seterrorMessage("");
+          setsuccessMessage("SUCCESS");
+          navigate('/surveypage', { state: { loginType: "guestUser" } });
         }
         else {
           seterrorMessage("Username already exists, try a different one");
