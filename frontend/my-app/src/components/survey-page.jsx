@@ -16,8 +16,16 @@ function Surveypage() {
   const[noiseLevel, setNoiseLevel] = useState("");
   const[busynessLevel, setBusynessLevel] = useState("");
   const[amenities, setAmenties] = useState("");
-  const [errorMessage, seterrorMessage] = useState("");
-  const [successMessage, setsuccessMessage] = useState("");
+  const[budget, setBudget] = useState("");
+  const[price, setPrice] = useState("");
+  const[location, setLocation] = useState("");
+  const[distance, setDistance] = useState("");
+  const[diningHall, setDiningHall] = useState("");
+  const[fastFood, setFastFood] = useState("");
+  const[cuisine, setCuisine] = useState("");
+  const[dietary, setDietary] = useState("");
+  const[errorMessage, seterrorMessage] = useState("");
+  const[successMessage, setsuccessMessage] = useState("");
 
   const options = [
     { value: 1, label: 1 },
@@ -30,7 +38,7 @@ function Surveypage() {
   const amenitiesOptions = [
     { value: "CAEN", label: "CAEN"},
     { value: "computers", label: "computers"},
-    { value: "moniters", label: "moniters"},
+    { value: "monitors", label: "monitors"},
     { value: "good number of outlets", label: "good number of outlets"},
     { value: "nearby food/cafes", label: "nearby food/cafes"},
     { value: "whiteboards", label: "whiteboards"},
@@ -84,6 +92,18 @@ function Surveypage() {
     { value: "Other", label: "Other" }
   ];
 
+  const dietaryOptions = [
+    { value: "vegetarian", label: "vegetarian" },
+    { value: "vegan", label: "vegan" },
+    { value: "Halal", label: "Halal" },
+    { value: "Kosher", label: "Kosher" },
+    { value: "dairyFree", label: "dairyFree" },
+    { value: "nutFree", label: "nutFree" },
+    { value: "beefFree", label: "beefFree" },
+    { value: "alcoholFree", label: "alcoholFree" },
+    { value: "smokeFree", label: "smokeFree" },
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -109,7 +129,7 @@ function Surveypage() {
           options={options}
           value={busynessLevel}
           onChange={(selectedOption) => setBusynessLevel(selectedOption)}
-          placeholder="Select noise level"
+          placeholder="Select busyness level"
         />
       <h2>Which of these amenities do you require for a study space?</h2>
         <Select
@@ -117,55 +137,63 @@ function Surveypage() {
           options={amenitiesOptions}
           value={amenities}
           onChange={(selectedOption) => setAmenties(selectedOption)}
-          placeholder="Select noise level"
+          placeholder="Select amenities"
         />
       <h2>What is your preferred budget for restaurants?</h2>
         <Select
           className="question"
           options={restuarantBudgetOptions}
           value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          onChange={(selectedOption) => setBudget(selectedOption)}
+          placeholder="Select budget"
         />
       <h2>How high of a deciding factor is price to you on a scale of 1 to 5?</h2>
         <Select
           className="question"
           options={options}
-          value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          value={price}
+          onChange={(selectedOption) => setPrice(selectedOption)}
+          placeholder="Select price"
         />
       <h2>How far are you willing to travel to a location from central campus on a scale of 1 to 5?</h2>
         <Select
           className="question"
           options={options}
-          value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          value={location}
+          onChange={(selectedOption) => setLocation(selectedOption)}
+          placeholder="Select location"
         />
       <h2>Do you prefer dining hall or outside of dining hall options</h2>
         <Select
           className="question"
           options={outsideOrDiningOptions}
-          value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          value={diningHall}
+          onChange={(selectedOption) => setDiningHall(selectedOption)}
+          placeholder="Select dining option"
         />
       <h2>Do you prefer fast food or sit in restaurants?</h2>
         <Select
           className="question"
           options={fastFoodOrSitInOptions}
-          value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          value={fastFood}
+          onChange={(selectedOption) => setFastFood(selectedOption)}
+          placeholder="Select serving method"
         />
       <h2>What type of cuisine do you prefer?</h2>
         <Select
           className="question"
           options={cuisineOptions}
-          value={noiseLevel}
-          onChange={(selectedOption) => setNoiseLevel(selectedOption)}
-          placeholder="Select noise level"
+          value={cuisine}
+          onChange={(selectedOption) => setCuisine(selectedOption)}
+          placeholder="Select cuisine preferences"
+        />
+      <h2>Do you have any dietary restrictions?</h2>
+        <Select
+          className="question"
+          options={dietaryOptions}
+          value={dietary}
+          onChange={(selectedOption) => setDietary(selectedOption)}
+          placeholder="Select dietary restrictions"
         />
       <button type="submit" className="login-page-submit-button">
         Submit 

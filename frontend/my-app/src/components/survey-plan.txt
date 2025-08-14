@@ -40,22 +40,22 @@ Login Page  -> Create Account (write username and password for the new acct) -> 
 
 - how important is price to you on a scale of 1 to 5?
 
-- do you prefer going to stores on central campus or north campus?
+- do you prefer going to stores on central campus or north campus? (location)
     - north 
     - central
     - no preference -> default to central
 
-- how far are you willing to travel to a location from central campus on a scale of 1 to 5?
+- how far are you willing to travel to a location from central campus on a scale of 1 to 5? (distance)
 
--Do you prefer dining hall or outside of dining hall options
+-Do you prefer dining hall or outside of dining hall options (diningHall)
       -0 -> dining hall
       -1 -> outside
 
--Do you prefer fast food or sit in
+-Do you prefer fast food or sit in (fastFood)
       -0 -> fast food
       -1 -> sit-in
 
--what type of cuisine do you prefer?:
+-what type of cuisine do you prefer?: (cuisine)
     - options and then other:
       -Indian
       -Japanese
@@ -68,6 +68,23 @@ Login Page  -> Create Account (write username and password for the new acct) -> 
       -African
       -MDining Dining Halls and Mini Cafes (inside residental halls and libraries)
       -Other
+
+
+
+Dietary Preferences: What are your dietary preference?
+- Vegetarian
+- Vegan
+- Halal
+- Kosher
+- Dairy-Free
+- Nut-Free
+- Beef-Free
+- Alcohol-Free
+- Smoke-Free
+
+
+
+
 
 Restaurant List:
 -Fast food
@@ -85,10 +102,6 @@ Restaurant List:
     -Blue Nile
     -Tios
     -Kanbu Sushi
-
-
-
-
 
 
 
